@@ -32,6 +32,12 @@ function App({ title }: Props): JSX.Element {
     setTodos(newTodos);
   }
 
+  const removeTodo = (index: number): void => {
+    const newTodos: ITodo[] = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  }
+
   return (
     <div className="App">
       <h1>{title}</h1>
@@ -44,8 +50,11 @@ function App({ title }: Props): JSX.Element {
           return (
             <React.Fragment key={todo.text}>
               <div style={{ textDecoration: todo.complete ? 'line-through' : '' }}>{todo.text}</div>
-              <button type="button" onClick={() => completeTodo(index)}>
+              <button type="button" onClick={(): void => completeTodo(index)}>
                 {todo.complete ? 'Incomplete' : 'Complete'}
+              </button>
+              <button type="button" onClick={(): void => removeTodo(index)}>
+                Remove
               </button>
             </React.Fragment>
           )
